@@ -1,6 +1,6 @@
 {
   "name": "@snowieedev/create-vertex",
-  "version": "0.2.1",
+  "version": "0.2.2",
   "description": "Create a new VERTEX project",
   "bin": {
     "create-vertex": "./dist/index.js"
@@ -17,6 +17,8 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",
+    "@snowieedev/composer": "workspace:*",
+    "@snowieedev/features": "workspace:*",
     "fs-extra": "^11.2.0",
     "picocolors": "^1.0.0"
   },
