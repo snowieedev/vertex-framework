@@ -17,7 +17,9 @@
   "dependencies": {
     "@clack/prompts": "^0.7.0",
     "picocolors": "^1.0.0",
-    "fs-extra": "^11.2.0"
+    "fs-extra": "^11.2.0",
+    "@snowieedev/composer": "workspace:*",
+    "@snowieedev/features": "workspace:*"
   },
   "devDependencies": {
     "typescript": "^5.4.0",

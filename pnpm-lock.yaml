@@ -56,6 +56,28 @@ importers:
         specifier: ^5.4.0
         version: 5.9.3
 
+  packages/composer:
+    dependencies:
+      deepmerge:
+        specifier: ^4.3.1
+        version: 4.3.1
+      fs-extra:
+        specifier: ^11.2.0
+        version: 11.3.5
+      picocolors:
+        specifier: ^1.1.0
+        version: 1.1.1
+    devDependencies:
+      '@types/fs-extra':
+        specifier: ^11.0.4
+        version: 11.0.4
+      '@types/node':
+        specifier: ^20.12.7
+        version: 20.19.43
+      typescript:
+        specifier: ^5.4.5
+        version: 5.9.3
+
   packages/config:
     dependencies:
       '@snowieedev/vertex-shared':
@@ -74,6 +96,12 @@ importers:
       '@clack/prompts':
         specifier: ^0.7.0
         version: 0.7.0
+      '@snowieedev/composer':
+        specifier: workspace:*
+        version: link:../composer
+      '@snowieedev/features':
+        specifier: workspace:*
+        version: link:../features
       fs-extra:
         specifier: ^11.2.0
         version: 11.3.5
@@ -107,6 +135,22 @@ importers:
         specifier: ^5.4.0
         version: 5.9.3
 
+  packages/features:
+    dependencies:
+      '@snowieedev/composer':
+        specifier: workspace:*
+        version: link:../composer
+      picocolors:
+        specifier: ^1.1.0
+        version: 1.1.1
+    devDependencies:
+      '@types/node':
+        specifier: ^20.12.7
+        version: 20.19.43
+      typescript:
+        specifier: ^5.4.5
+        version: 5.9.3
+
   packages/shared:
     dependencies:
       picocolors:
@@ -116,8 +160,6 @@ importers:
       typescript:
         specifier: ^5.4.0
         version: 5.9.3
-
-  packages/templates: {}
 
 packages:
 
@@ -559,6 +601,10 @@ packages:
     resolution: {integrity: sha512-Vw8qHK3bZM9y/P10u3Vib8o/DdkvA2OtPtZvD871QKjy74Wj1WSKFILMPRPSdUSx5RFK1arlJzEtA4PkFgnbuA==}
     engines: {node: '>=18'}
 
+  deepmerge@4.3.1:
+    resolution: {integrity: sha512-3sUqbMEc77XqpdNO7FRyRog+eW3ph+GYCbj+rK+uYyRMuwsVy0rMiVtPn+QJlKFvWP/1PYpapqYn0Me2knFn+A==}
+    engines: {node: '>=0.10.0'}
+
   esbuild@0.20.2:
     resolution: {integrity: sha512-WdOOppmUNU+IbZ0PaDiTst80zjnrOkyJNHoKupIcVyU8Lvla3Ugx94VzkQ32Ijqd7UhHJy75gNWDMUekcrSJ6g==}
     engines: {node: '>=12'}
@@ -897,6 +943,8 @@ snapshots:
       undici-types: 6.21.0
 
   commander@12.1.0: {}
+
+  deepmerge@4.3.1: {}
 
   esbuild@0.20.2:
     optionalDependencies:

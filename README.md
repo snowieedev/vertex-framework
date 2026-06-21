@@ -11,8 +11,9 @@ VERTEX is built on a provider-based architecture, decoupling the framework logic
 - **`@snowieedev/vertex-dev-server`**: Development server abstraction (currently Vite).
 - **`@snowieedev/vertex-builder`**: Production build system abstraction (currently esbuild).
 - **`@snowieedev/vertex-shared`**: Shared utilities and error handling.
-- **`create-vertex-app`**: Interactive wizard to scaffold new VERTEX projects.
-- **`@snowieedev/vertex-templates`**: Base project templates.
+- **`@snowieedev/composer`**: The project orchestration engine. Dynamically builds project blueprints, manages dependencies, resolves conflicts, and generates necessary files instead of using static templates.
+- **`@snowieedev/features`**: A collection of isolated plugins (TypeScript, Tailwind, shadcn/ui, GSAP, etc.) that the Composer uses to dynamically scaffold a project based on user selection.
+- **`create-vertex-app`**: Interactive wizard to scaffold new VERTEX projects using the Composer engine.
 
 ## Development Workflow
 

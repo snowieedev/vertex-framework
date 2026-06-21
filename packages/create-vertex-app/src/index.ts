@@ -5,6 +5,9 @@ import fs from 'fs-extra';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
+import { Composer, ProjectConfiguration } from '@snowieedev/composer';
+import * as featuresList from '@snowieedev/features';
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -51,16 +54,7 @@ async function main() {
     }
   );
 
-  let features = {
-    typescript: true,
-    eslint: true,
-    tailwind: true,
-    motion: true,
-    ui: 'shadcn',
-    git: true,
-    aliases: true,
-    appRouter: true,
-  };
+  let selectedFeatures = ['typescript', 'eslint', 'tailwind', 'shadcn', 'git', 'aliases', 'appRouter'];
 
   if (project.setup === 'custom') {
     const custom = await p.group(
@@ -82,7 +76,7 @@ async function main() {
           message: 'Which UI library?',
           options: [
             { value: 'shadcn', label: 'shadcn/ui' },
-            { value: 'magic', label: 'Magic UI' },
+            { value: 'magic-ui', label: 'Magic UI' },
             { value: 'none', label: 'None' },
           ] as any
         }),
@@ -97,11 +91,20 @@ async function main() {
         },
       }
     );
-    features = { ...features, ...custom, motion: custom.animation === 'motion', ui: custom.ui as string };
+    
+    selectedFeatures = [];
+    if (custom.typescript) selectedFeatures.push('typescript');
+    if (custom.eslint) selectedFeatures.push('eslint');
+    if (custom.tailwind) selectedFeatures.push('tailwind');
+    if (custom.animation !== 'none') selectedFeatures.push(custom.animation as string);
+    if (custom.ui !== 'none') selectedFeatures.push(custom.ui as string);
+    if (custom.git) selectedFeatures.push('git');
+    if (custom.aliases) selectedFeatures.push('aliases');
+    if (custom.appRouter) selectedFeatures.push('appRouter');
   }
 
   const s = p.spinner();
-  s.start('Scaffolding project');
+  s.start('Scaffolding project via Composer');
 
   const targetDir = path.resolve(process.cwd(), project.name as string);
 
@@ -111,56 +114,30 @@ async function main() {
     process.exit(1);
   }
 
-  await fs.mkdir(targetDir, { recursive: true });
+  const config: ProjectConfiguration = {
+    name: project.name as string,
+    packageManager: project.packageManager as any,
+    features: selectedFeatures
+  };
 
-  // Locate templates - in prod this would be resolved from @snowieedev/vertex-templates or similar
-  // For Phase 1 we assume the templates package is installed nearby or shipped with the CLI
-  // We'll mimic this by assuming a specific relative path or a known location for the template.
-  // Actually, since we are in the monorepo for now, we can resolve it up the tree, but for a distributed tool
-  // we would bundle templates. Let's just create some dummy files if templates aren't found, 
-  // or point to the installed @snowieedev/vertex-templates package.
-  
-  // Since we're in the monorepo, let's use the local packages/templates/default folder for this phase.
-  // We'll resolve it assuming we are inside `packages/create-vertex-app/dist`.
-  const templateDir = path.resolve(__dirname, '../../templates/default');
-  
-  if (fs.existsSync(templateDir)) {
-    await fs.copy(templateDir, targetDir);
-    // Rename .tmpl files
-    if (fs.existsSync(path.resolve(targetDir, 'package.json.tmpl'))) {
-      const pkgContent = await fs.readFile(path.resolve(targetDir, 'package.json.tmpl'), 'utf-8');
-      await fs.writeFile(path.resolve(targetDir, 'package.json'), pkgContent.replace('{{projectName}}', project.name as string));
-      await fs.remove(path.resolve(targetDir, 'package.json.tmpl'));
-    }
-  } else {
-    // Fallback if not found
-    await fs.writeFile(path.resolve(targetDir, 'package.json'), JSON.stringify({
-      name: project.name,
-      version: "0.1.0",
-      private: true,
-      scripts: { dev: "vertex dev", build: "vertex build" },
-      devDependencies: { "@snowieedev/vertex-cli": "latest" }
-    }, null, 2));
-    await fs.mkdir(path.resolve(targetDir, 'src'));
-    await fs.writeFile(path.resolve(targetDir, 'src/index.ts'), "console.log('Hello VERTEX');");
+  try {
+    const composer = new Composer();
+    
+    // Register all available features
+    const allFeatures = Object.values(featuresList);
+    composer.registerFeatures(allFeatures);
+    
+    await composer.compose(targetDir, config);
+    s.stop('Project scaffolded successfully');
+  } catch (error: any) {
+    s.stop('Project scaffolding failed');
+    p.cancel(`Error: ${error.message}`);
+    process.exit(1);
   }
-
-  // Handle git initialization
-  if (features.git) {
-    try {
-      const { execSync } = await import('node:child_process');
-      execSync('git init', { cwd: targetDir, stdio: 'ignore' });
-    } catch (e) {
-      // ignore
-    }
-  }
-
-  s.stop('Project scaffolded');
 
   p.note(`Next Steps:
   1. cd ${project.name}
-  2. ${project.packageManager} install
-  3. ${project.packageManager} run dev`, 'Project created successfully!');
+  2. ${project.packageManager} run dev`, 'Project created successfully!');
 
   p.outro(pc.green('You are ready to build!'));
 }
