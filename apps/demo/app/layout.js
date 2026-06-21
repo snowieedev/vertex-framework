@@ -1,0 +1,4 @@
+import { jsx as _jsx, jsxs as _jsxs } from "react/jsx-runtime";
+export default function RootLayout({ children }) {
+    return (_jsxs("html", { lang: "en", children: [_jsxs("head", { children: [_jsx("title", { children: "Vertex Demo App" }), _jsx("meta", { charSet: "utf-8" })] }), _jsxs("body", { style: { fontFamily: 'system-ui, sans-serif', margin: 0, padding: 20 }, children: [_jsxs("header", { style: { borderBottom: '1px solid #ccc', paddingBottom: 10, marginBottom: 20 }, children: [_jsx("h1", { children: "Vertex Framework" }), _jsxs("nav", { children: [_jsx("a", { href: "/", style: { marginRight: 10 }, children: "Home" }), _jsx("a", { href: "/users/john", children: "User: John" })] })] }), _jsx("main", { children: children }), _jsx("footer", { style: { marginTop: 40, paddingTop: 10, borderTop: '1px solid #ccc', fontSize: '0.8em', color: '#666' }, children: "Built with Vertex Phase 2 Engine" })] })] }));
+}
