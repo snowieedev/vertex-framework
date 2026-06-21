@@ -114,10 +114,13 @@ async function main() {
     process.exit(1);
   }
 
+  const skipInstall = process.argv.includes('--skip-install');
+
   const config: ProjectConfiguration = {
     name: project.name as string,
     packageManager: project.packageManager as any,
-    features: selectedFeatures
+    features: selectedFeatures,
+    skipInstall
   };
 
   try {

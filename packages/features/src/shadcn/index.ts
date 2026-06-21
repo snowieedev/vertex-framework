@@ -6,7 +6,7 @@ export const shadcnFeature: Feature = {
   description: 'Add shadcn/ui components',
   dependencies: ['tailwind'],
   conflicts: ['magic-ui'], // Optional conflict handling example
-  devDependencies: {
+  npmDependencies: {
     'lucide-react': '^0.358.0',
     'class-variance-authority': '^0.7.0',
     'clsx': '^2.1.0',

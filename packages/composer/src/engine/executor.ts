@@ -34,12 +34,16 @@ export class Executor {
       await fs.writeFile(fullPath, content);
     }
 
-    console.log(pc.blue(`Installing dependencies using ${config.packageManager}...`));
-    try {
-      execSync(`${config.packageManager} install`, { cwd: targetDir, stdio: 'inherit' });
-    } catch (error) {
-      console.error(pc.red('Failed to install dependencies.'), error);
-      throw error;
+    if (!config.skipInstall) {
+      console.log(pc.blue(`Installing dependencies using ${config.packageManager}...`));
+      try {
+        execSync(`${config.packageManager} install`, { cwd: targetDir, stdio: 'inherit' });
+      } catch (error) {
+        console.error(pc.red('Failed to install dependencies.'), error);
+        throw error;
+      }
+    } else {
+      console.log(pc.blue(`Skipping dependency installation. You will need to run '${config.packageManager} install' manually.`));
     }
 
     console.log(pc.blue('Running post-install hooks...'));

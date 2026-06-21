@@ -35,6 +35,7 @@ export interface ProjectConfiguration {
   name: string;
   packageManager: 'npm' | 'pnpm' | 'yarn' | 'bun';
   features: string[]; // List of selected feature IDs
+  skipInstall?: boolean;
 }
 
 export interface ProjectBlueprint {

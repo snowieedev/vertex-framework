@@ -1,6 +1,8 @@
 # VERTEX Framework
 
-VERTEX is a modern, scalable, and extensible web framework.
+VERTEX is a modern, scalable, and extensible **React-based web framework**.
+
+**Important Distinction**: VERTEX provides the framework infrastructure (routing, rendering, SSR, hydration, optimization, and development workflow), while **React** provides the underlying component model and rendering primitives. You write standard React components, and VERTEX handles the rest.
 
 ## Architecture
 

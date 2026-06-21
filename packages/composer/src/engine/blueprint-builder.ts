@@ -6,8 +6,14 @@ export class BlueprintBuilder {
     const blueprint: ProjectBlueprint = {
       folders: [],
       files: new Map(),
-      dependencies: {},
-      devDependencies: {},
+      dependencies: {
+        'react': '^19.0.0',
+        'react-dom': '^19.0.0'
+      },
+      devDependencies: {
+        '@types/react': '^19.0.0',
+        '@types/react-dom': '^19.0.0'
+      },
       configFragments: {
         packageJson: {
           name: config.name,

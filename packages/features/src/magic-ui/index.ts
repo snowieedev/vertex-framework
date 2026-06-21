@@ -6,7 +6,7 @@ export const magicUiFeature: Feature = {
   description: 'Add Magic UI components',
   dependencies: ['tailwind'],
   conflicts: ['shadcn'], // Optional conflict handling example
-  devDependencies: {
+  npmDependencies: {
     'lucide-react': '^0.358.0',
     'class-variance-authority': '^0.7.0',
     'clsx': '^2.1.0',
