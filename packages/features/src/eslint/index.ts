@@ -6,7 +6,7 @@ export const eslintFeature: Feature = {
   description: 'Add ESLint configuration',
   devDependencies: {
     eslint: '^9.0.0',
-    'typescript-eslint': '^7.7.0',
+    'typescript-eslint': '^8.0.0',
   },
   files: [
     {
