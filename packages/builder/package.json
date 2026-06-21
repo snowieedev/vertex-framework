@@ -1,0 +1,24 @@
+{
+  "name": "@snowieedev/vertex-builder",
+  "version": "0.1.0",
+  "description": "Build system abstraction and providers for VERTEX",
+  "main": "./dist/index.js",
+  "types": "./dist/index.d.ts",
+  "type": "module",
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "tsc",
+    "dev": "tsc --watch",
+    "clean": "rm -rf dist"
+  },
+  "dependencies": {
+    "@snowieedev/vertex-shared": "workspace:*",
+    "@snowieedev/vertex-config": "workspace:*",
+    "esbuild": "^0.20.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.4.0"
+  }
+}

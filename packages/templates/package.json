@@ -1,0 +1,9 @@
+{
+  "name": "@snowieedev/vertex-templates",
+  "version": "0.1.0",
+  "description": "Templates for VERTEX framework",
+  "type": "module",
+  "files": [
+    "default"
+  ]
+}
