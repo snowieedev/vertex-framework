@@ -55,10 +55,10 @@ async function main() {
 
   try {
     // Determine template path
-    let templateDir = path.resolve(__dirname, '../../templates/default');
+    let templateDir = path.resolve(__dirname, '../templates/default');
     if (!fs.existsSync(templateDir)) {
-      // Try alternate path for local dev
-      templateDir = path.resolve(__dirname, '../../../templates/default');
+      // Try alternate path for local dev (if running via tsx from src)
+      templateDir = path.resolve(__dirname, '../../templates/default');
     }
 
     if(!fs.existsSync(templateDir)) {
