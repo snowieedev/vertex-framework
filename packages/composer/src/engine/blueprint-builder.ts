@@ -13,7 +13,13 @@ export class BlueprintBuilder {
           name: config.name,
           version: '0.1.0',
           private: true,
-          scripts: {},
+          scripts: {
+            dev: 'vertex dev',
+            build: 'vertex build'
+          },
+          devDependencies: {
+            '@snowieedev/vertex-cli': 'latest'
+          }
         },
         tsconfig: {},
         vertexConfig: [],

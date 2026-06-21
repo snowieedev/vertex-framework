@@ -5,20 +5,20 @@ export const eslintFeature: Feature = {
   displayName: 'ESLint',
   description: 'Add ESLint configuration',
   devDependencies: {
-    eslint: '^8.56.0',
-    '@typescript-eslint/eslint-plugin': '^7.0.0',
-    '@typescript-eslint/parser': '^7.0.0',
+    eslint: '^9.0.0',
+    'typescript-eslint': '^7.7.0',
   },
-  configFragments: {
-    eslint: {
-      env: { browser: true, es2020: true },
-      extends: [
-        'eslint:recommended',
-        'plugin:@typescript-eslint/recommended',
-      ],
-      parser: '@typescript-eslint/parser',
-      plugins: ['@typescript-eslint'],
-      rules: {},
+  files: [
+    {
+      path: 'eslint.config.mjs',
+      content: `import eslint from '@eslint/js';
+import tseslint from 'typescript-eslint';
+
+export default tseslint.config(
+  eslint.configs.recommended,
+  ...tseslint.configs.recommended,
+);
+`,
     },
-  },
+  ],
 };
