@@ -1,6 +1,6 @@
 {
   "name": "@snowieedev/create-vertex-app",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Create a new VERTEX project",
   "bin": {
     "@snowieedev/create-vertex-app": "./dist/index.js"
@@ -16,14 +16,14 @@
   },
   "dependencies": {
     "@clack/prompts": "^0.7.0",
-    "picocolors": "^1.0.0",
-    "fs-extra": "^11.2.0",
     "@snowieedev/composer": "workspace:*",
-    "@snowieedev/features": "workspace:*"
+    "@snowieedev/features": "workspace:*",
+    "fs-extra": "^11.2.0",
+    "picocolors": "^1.0.0"
   },
   "devDependencies": {
-    "typescript": "^5.4.0",
+    "@types/fs-extra": "^11.0.4",
     "@types/node": "^20.11.0",
-    "@types/fs-extra": "^11.0.4"
+    "typescript": "^5.4.0"
   }
 }
