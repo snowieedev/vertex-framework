@@ -13,6 +13,7 @@ export class BlueprintBuilder {
           name: config.name,
           version: '0.1.0',
           private: true,
+          type: 'module',
           scripts: {
             dev: 'vertex dev',
             build: 'vertex build'
