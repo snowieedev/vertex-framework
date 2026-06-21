@@ -16,7 +16,7 @@ VERTEX is built on a provider-based architecture, decoupling the framework logic
 - **`@snowieedev/vertex-shared`**: Shared utilities and error handling.
 - **`@snowieedev/composer`**: The project orchestration engine. Dynamically builds project blueprints, manages dependencies, resolves conflicts, and generates necessary files instead of using static templates.
 - **`@snowieedev/features`**: A collection of isolated plugins (TypeScript, Tailwind, shadcn/ui, GSAP, etc.) that the Composer uses to dynamically scaffold a project based on user selection.
-- **`create-vertex-app`**: Interactive wizard to scaffold new VERTEX projects using the Composer engine.
+- **`@snowieedev/create-vertex-app`**: Interactive wizard to scaffold new VERTEX projects using the Composer engine.
 
 ## File-based Routing Engine
 The framework provides an advanced file-based routing engine built on React:
