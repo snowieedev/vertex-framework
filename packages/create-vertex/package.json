@@ -1,6 +1,6 @@
 {
   "name": "@snowieedev/create-vertex",
-  "version": "0.2.5",
+  "version": "0.2.6",
   "description": "Create a new VERTEX project",
   "bin": {
     "create-vertex": "./dist/index.js"
