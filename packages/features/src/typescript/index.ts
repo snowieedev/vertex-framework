@@ -41,8 +41,8 @@ export const typescriptFeature: Feature = {
       body {
         margin: 0;
         font-family: 'Plus Jakarta Sans', sans-serif;
-        background: #09090b;
-        color: #fafafa;
+        background: #ffffff;
+        color: #000000;
         overflow-x: hidden;
       }
     </style>
@@ -58,10 +58,10 @@ export const typescriptFeature: Feature = {
       path: 'src/styles/globals.css',
       content: `/* Default fallback styles if Tailwind is not present */
 :root {
-  --bg-gradient: radial-gradient(circle at top, #18181b 0%, #09090b 100%);
+  --bg-color: #ffffff;
 }
 body {
-  background: var(--bg-gradient);
+  background: var(--bg-color);
   min-height: 100vh;
 }
 `,
@@ -73,6 +73,7 @@ body {
 const app = document.querySelector<HTMLDivElement>('#app');
 if (app) {
   app.innerHTML = \`
+    <!-- Main container centering everything -->
     <div style="
       display: flex;
       flex-direction: column;
@@ -81,82 +82,40 @@ if (app) {
       min-height: 100vh;
       padding: 2rem;
       text-align: center;
-      box-sizing: border-box;
-      position: relative;
+      font-family: sans-serif;
     ">
-      <!-- Glow effect -->
-      <div style="
-        position: absolute;
-        top: 0;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100%;
-        max-width: 600px;
-        height: 300px;
-        background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(99, 102, 241, 0) 70%);
-        pointer-events: none;
-        z-index: 1;
-      "></div>
+      
+      <!-- Main Heading -->
+      <h1 style="
+        font-size: 3rem;
+        font-weight: 800;
+        margin: 0 0 1rem 0;
+        color: #000000;
+      ">
+        Welcome to VERTEX
+      </h1>
 
-      <div style="max-width: 640px; z-index: 2;">
-        <div style="
-          display: inline-flex;
-          align-items: center;
-          gap: 0.5rem;
-          background: rgba(255, 255, 255, 0.05);
-          border: 1px rgba(255, 255, 255, 0.1) solid;
-          padding: 0.5rem 1rem;
-          border-radius: 9999px;
-          margin-bottom: 2rem;
-          font-size: 0.875rem;
-          font-weight: 500;
-          color: #a1a1aa;
-        ">
-          <span style="display: inline-block; width: 8px; height: 8px; background: #10b981; border-radius: 50%;"></span>
-          Scaffolded via VERTEX Composer
-        </div>
+      <!-- Description/Instructions -->
+      <p style="
+        font-size: 1.125rem;
+        color: #555555;
+        margin: 0 0 2rem 0;
+      ">
+        Get started by editing <code style="background: #f4f4f5; padding: 0.2rem 0.4rem; border-radius: 4px; color: #000; font-family: monospace;">src/index.ts</code>
+      </p>
 
-        <h1 style="
-          font-size: clamp(2.5rem, 6vw, 4rem);
-          font-weight: 800;
-          letter-spacing: -0.05em;
-          line-height: 1.1;
-          margin: 0 0 1.5rem 0;
-          background: linear-gradient(135deg, #ffffff 0%, #a1a1aa 100%);
-          -webkit-background-clip: text;
-          -webkit-text-fill-color: transparent;
-        ">
-          Welcome to <span style="background: linear-gradient(135deg, #6366f1 0%, #a855f7 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;">VERTEX</span>
-        </h1>
+      <!-- Action Button -->
+      <a href="https://github.com/snowieedev/vertex-framework" target="_blank" style="
+        background: #000000;
+        color: #ffffff;
+        padding: 0.75rem 1.5rem;
+        border-radius: 6px;
+        font-weight: 600;
+        text-decoration: none;
+      ">
+        Read Documentation
+      </a>
 
-        <p style="
-          font-size: 1.125rem;
-          line-height: 1.6;
-          color: #a1a1aa;
-          margin: 0 0 2.5rem 0;
-        ">
-          Your project has been successfully composed with modern developer tooling. Edit <code style="background: rgba(255, 255, 255, 0.1); padding: 0.2rem 0.4rem; border-radius: 4px; color: #f4f4f5; font-family: monospace; font-size: 0.9em;">src/index.ts</code> to start building.
-        </p>
-
-        <div style="
-          display: flex;
-          gap: 1rem;
-          justify-content: center;
-          align-items: center;
-        ">
-          <a href="https://github.com/snowieedev/vertex-framework" target="_blank" style="
-            background: #ffffff;
-            color: #09090b;
-            padding: 0.75rem 1.5rem;
-            border-radius: 8px;
-            font-weight: 600;
-            text-decoration: none;
-            transition: opacity 0.2s;
-          ">
-            Explore Documentation
-          </a>
-        </div>
-      </div>
     </div>
   \`;
 }

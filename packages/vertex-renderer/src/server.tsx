@@ -7,8 +7,10 @@ type ComponentModule = {
   default: React.ComponentType<any>;
 };
 
-export async function renderServerTree(matchedRoute: MatchedRoute, url: string): Promise<React.ReactElement> {
+export async function renderServerTree(matchedRoute: MatchedRoute, urlStr: string): Promise<React.ReactElement> {
   const { leaf, layouts, params } = matchedRoute;
+  const url = new URL(urlStr, 'http://localhost');
+  const searchParams = Object.fromEntries(url.searchParams.entries());
 
   // 1. Import the page component
   if (!leaf.page) {
@@ -29,8 +31,11 @@ export async function renderServerTree(matchedRoute: MatchedRoute, url: string):
     throw new Error(`Page component at ${leaf.page} must be a default export.`);
   }
 
+  // Extract loaderData if populated by the runtime handler
+  const loaderData = (matchedRoute as any).loaderData;
+
   // 2. Wrap the page with its layouts
-  let currentElement = <PageComponent params={params} searchParams={{}} />;
+  let currentElement = <PageComponent params={params} searchParams={searchParams} loaderData={loaderData} />;
 
   // Iterate backwards through layouts to wrap bottom-up
   for (let i = layouts.length - 1; i >= 0; i--) {

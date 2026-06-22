@@ -17,7 +17,9 @@
     "picocolors": "^1.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "@snowieedev/vertex-core": "workspace:*"
+    "@snowieedev/vertex-core": "workspace:*",
+    "@snowieedev/vertex-router": "workspace:*",
+    "@snowieedev/vertex-renderer": "workspace:*"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
