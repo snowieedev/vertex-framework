@@ -1,6 +1,6 @@
 import { RouteManifest } from '@snowieedev/vertex-core';
 import { matchRoute } from '@snowieedev/vertex-router';
-import { renderServerTree } from '@snowieedev/vertex-renderer';
+import { renderServerTree, renderServerError } from '@snowieedev/vertex-renderer';
 import { renderToPipeableStream } from 'react-dom/server';
 import { VertexRequestContext } from './context.js';
 import { parseCookies } from './cookies.js';
@@ -10,6 +10,7 @@ export interface HandleRequestOptions {
   request: Request;
   manifest: RouteManifest;
   sessionStorage?: SessionStorage;
+  loadModule?: (url: string) => Promise<any>;
 }
 
 export async function handleRequest(options: HandleRequestOptions): Promise<Response> {
@@ -37,10 +38,19 @@ export async function handleRequest(options: HandleRequestOptions): Promise<Resp
     };
 
     // Load the route modules
-    const leafUrl = process.platform === 'win32' 
-      ? `file://${matchedRoute.leaf.page!.replace(/\.tsx$/, '.js')}`
-      : matchedRoute.leaf.page!.replace(/\.tsx$/, '.js');
-    const leafModule = await import(leafUrl);
+    const isDev = !!options.loadModule;
+    const targetExt = isDev ? '.tsx' : '.js';
+    let leafUrl = matchedRoute.leaf.page!.replace(/\.tsx$/, targetExt).replace(/\\/g, '/');
+    
+    let leafModule: any;
+    if (options.loadModule) {
+      leafModule = await options.loadModule(leafUrl);
+    } else {
+      if (!isDev && process.platform === 'win32') {
+        leafUrl = `file://${leafUrl}`;
+      }
+      leafModule = await import(leafUrl);
+    }
 
     // 1. Handle Action for non-GET/HEAD requests
     if (request.method !== 'GET' && request.method !== 'HEAD') {
@@ -48,6 +58,8 @@ export async function handleRequest(options: HandleRequestOptions): Promise<Resp
         const actionResult = await leafModule.action(context);
         if (actionResult instanceof Response) {
           finalResponse = actionResult;
+        } else {
+          (matchedRoute as any).actionData = actionResult;
         }
       }
     }
@@ -71,7 +83,9 @@ export async function handleRequest(options: HandleRequestOptions): Promise<Resp
 
     // 3. Render HTML Stream if no response has been finalized yet
     if (!finalResponse) {
-      const tree = await renderServerTree(matchedRoute, url.href);
+      const tree = await renderServerTree(matchedRoute, url.href, {
+        loadModule: options.loadModule
+      });
       
       const { Transform } = await import('node:stream');
       const transform = new Transform({
@@ -107,12 +121,53 @@ export async function handleRequest(options: HandleRequestOptions): Promise<Resp
       });
     }
 
-  } catch (error) {
+  } catch (error: any) {
     if (error instanceof Response) {
       finalResponse = error;
     } else {
       console.error('Unhandled Server Error:', error);
-      finalResponse = new Response('Internal Server Error', { status: 500 });
+      try {
+        const errorTree = await renderServerError(matchedRoute, error as Error, {
+          loadModule: options.loadModule
+        });
+        
+        const { Transform } = await import('node:stream');
+        const transform = new Transform({
+          transform(chunk: any, encoding: string, callback: any) {
+            callback(null, chunk);
+          }
+        });
+        
+        const stream = renderToPipeableStream(errorTree, {
+          bootstrapScripts: [],
+          onShellReady() {},
+          onAllReady() {},
+          onError(err) {
+            console.error('Streaming error during error boundary rendering:', err);
+          }
+        });
+
+        stream.pipe(transform);
+
+        const readable = new ReadableStream({
+          start(controller) {
+            transform.on('data', (chunk: any) => controller.enqueue(chunk));
+            transform.on('end', () => controller.close());
+            transform.on('error', (err: any) => controller.error(err));
+          }
+        });
+
+        finalResponse = new Response(readable, {
+          status: 500,
+          headers: {
+            'Content-Type': 'text/html; charset=utf-8',
+            'Transfer-Encoding': 'chunked'
+          }
+        });
+      } catch (renderingError) {
+        console.error('Error rendering error boundary:', renderingError);
+        finalResponse = new Response('Internal Server Error', { status: 500 });
+      }
     }
   }
 
