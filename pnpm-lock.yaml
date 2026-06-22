@@ -179,6 +179,15 @@ importers:
       '@snowieedev/vertex-config':
         specifier: workspace:*
         version: link:../config
+      '@snowieedev/vertex-core':
+        specifier: workspace:*
+        version: link:../vertex-core
+      '@snowieedev/vertex-router':
+        specifier: workspace:*
+        version: link:../vertex-router
+      '@snowieedev/vertex-runtime':
+        specifier: workspace:*
+        version: link:../vertex-runtime
       '@snowieedev/vertex-shared':
         specifier: workspace:*
         version: link:../shared

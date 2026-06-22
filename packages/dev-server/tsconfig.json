@@ -7,6 +7,9 @@
   "include": ["src/**/*"],
   "references": [
     { "path": "../shared" },
-    { "path": "../config" }
+    { "path": "../config" },
+    { "path": "../vertex-core" },
+    { "path": "../vertex-router" },
+    { "path": "../vertex-runtime" }
   ]
 }

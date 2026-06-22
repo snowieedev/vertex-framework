@@ -15,6 +15,9 @@
   },
   "dependencies": {
     "@snowieedev/vertex-config": "workspace:*",
+    "@snowieedev/vertex-core": "workspace:*",
+    "@snowieedev/vertex-router": "workspace:*",
+    "@snowieedev/vertex-runtime": "workspace:*",
     "@snowieedev/vertex-shared": "workspace:*",
     "vite": "^5.2.0"
   },
