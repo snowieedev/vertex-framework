@@ -1,6 +1,6 @@
 {
   "name": "@snowieedev/vertex-core",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Vertex Framework core routing and rendering engine",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",

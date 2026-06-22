@@ -1,6 +1,6 @@
 {
   "name": "@snowieedev/vertex-router",
-  "version": "0.2.4",
+  "version": "0.2.5",
   "description": "Vertex Framework core routing and rendering engine",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
@@ -14,10 +14,10 @@
     "clean": "rm -rf dist"
   },
   "dependencies": {
+    "@snowieedev/vertex-core": "workspace:*",
     "picocolors": "^1.0.0",
     "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "@snowieedev/vertex-core": "workspace:*"
+    "react-dom": "^18.2.0"
   },
   "devDependencies": {
     "@types/node": "^20.11.0",
