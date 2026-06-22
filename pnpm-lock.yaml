@@ -255,22 +255,10 @@ importers:
       picocolors:
         specifier: ^1.0.0
         version: 1.1.1
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
     devDependencies:
       '@types/node':
         specifier: ^20.11.0
         version: 20.19.43
-      '@types/react':
-        specifier: ^18.2.66
-        version: 18.3.31
-      '@types/react-dom':
-        specifier: ^18.2.22
-        version: 18.3.7(@types/react@18.3.31)
       typescript:
         specifier: ^5.4.0
         version: 5.9.3
@@ -286,12 +274,6 @@ importers:
       picocolors:
         specifier: ^1.0.0
         version: 1.1.1
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
     devDependencies:
       '@types/node':
         specifier: ^20.11.0
@@ -302,6 +284,12 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.22
         version: 18.3.7(@types/react@18.3.31)
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
       typescript:
         specifier: ^5.4.0
         version: 5.9.3
@@ -314,22 +302,10 @@ importers:
       picocolors:
         specifier: ^1.0.0
         version: 1.1.1
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
     devDependencies:
       '@types/node':
         specifier: ^20.11.0
         version: 20.19.43
-      '@types/react':
-        specifier: ^18.2.66
-        version: 18.3.31
-      '@types/react-dom':
-        specifier: ^18.2.22
-        version: 18.3.7(@types/react@18.3.31)
       typescript:
         specifier: ^5.4.0
         version: 5.9.3
@@ -348,12 +324,6 @@ importers:
       picocolors:
         specifier: ^1.0.0
         version: 1.1.1
-      react:
-        specifier: ^18.2.0
-        version: 18.3.1
-      react-dom:
-        specifier: ^18.2.0
-        version: 18.3.1(react@18.3.1)
     devDependencies:
       '@types/node':
         specifier: ^20.11.0
@@ -364,6 +334,12 @@ importers:
       '@types/react-dom':
         specifier: ^18.2.22
         version: 18.3.7(@types/react@18.3.31)
+      react:
+        specifier: ^18.2.0
+        version: 18.3.1
+      react-dom:
+        specifier: ^18.2.0
+        version: 18.3.1(react@18.3.1)
       typescript:
         specifier: ^5.4.0
         version: 5.9.3
