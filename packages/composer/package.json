@@ -1,6 +1,6 @@
 {
   "name": "@snowieedev/composer",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "VERTEX Composer - Project Generation Engine",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",

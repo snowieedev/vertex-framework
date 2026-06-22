@@ -1,6 +1,6 @@
 {
   "name": "@snowieedev/vertex-cli",
-  "version": "0.2.6",
+  "version": "0.2.7",
   "description": "CLI for VERTEX framework",
   "bin": {
     "vertex": "./dist/index.js"
