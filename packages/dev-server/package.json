@@ -1,6 +1,6 @@
 {
   "name": "@snowieedev/vertex-dev-server",
-  "version": "0.2.3",
+  "version": "0.2.4",
   "description": "Development server abstraction and providers for VERTEX",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
